@@ -10,6 +10,7 @@ pub const MESSAGE_INVALID_TOKEN: &str = "Invalid token, please login again";
 pub const MESSAGE_INTERNAL_SERVER_ERROR: &str = "Internal Server Error";
 pub const MESSAGE_EMPTY: &str = "Schematic title or description cannot be empty";
 pub const MESSAGE_TOO_LONG: &str = "Schematic title or description is too long";
+pub const MESSAGE_UNAUTHORIZED: &str = "You are not authorized to this, try logging in again";
 
 pub const MESSAGE_TOKEN_MISSING: &str = "Token is missing";
 
