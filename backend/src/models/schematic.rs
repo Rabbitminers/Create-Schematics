@@ -1,6 +1,7 @@
 use crate::{
     config::db::Connection,
     schema::schematics::{self, dsl::*}, 
+    models::user::User,
     constants,
 };
 use chrono::{NaiveDateTime, Utc};
@@ -23,13 +24,12 @@ pub struct Schematic {
 pub struct SchematicDTO {
     pub title: String,
     pub description: String,
-    pub author: i32,
     pub tags: String,
     pub display: String
 }
 
 impl Schematic {
-    pub fn upload(schematic: SchematicDTO, conn: &Connection) -> Result<String, String> {
+    pub fn upload(schematic: SchematicDTO, user: User, conn: &Connection) -> Result<String, String> {
         if schematic.title.is_empty() || schematic.description.is_empty() {
            return Err(constants::MESSAGE_EMPTY.to_string())
         }
@@ -43,7 +43,7 @@ impl Schematic {
             id: schematic_id,
             title: schematic.title,
             description: schematic.description,
-            author: schematic.author,
+            author: user.id,
             tags: schematic.tags,
             display: schematic.display,
             date: now.naive_utc()
