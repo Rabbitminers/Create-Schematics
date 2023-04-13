@@ -2,7 +2,7 @@
 <header class="site-header" role="presentation">
     <section>
         <RouterLink to="/home">
-            <v-icon name="px-download"/> 
+            <DownloadIcon/>
         </RouterLink>
     </section>
     <section>
@@ -11,27 +11,24 @@
 </header>
 </template>
 
-<script lang="ts">
-import { OhVueIcon } from "oh-vue-icons";
-
-export default {
-  components: {
-    "v-icon": OhVueIcon
-  }
-};
+<script setup lang="ts">
+import DownloadIcon from './icons/DownloadIcon.vue';
 </script>
 
 <style lang="scss">
 .site-header {
-    position: absolute;
-    background-color: var(--colour-background-soft);
+    background-color: var(--colour-andesite);
     display: flex;
-    width: 100vw;
+    width: 100%;
     gap: 10px;
     height: 10vh;
 
     > section {
-        text-align: center;
+        padding: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 3em;
+        height: 3em;
     }
 }
 
@@ -39,7 +36,7 @@ export default {
     .site-header {
         flex-direction: column;
         width: 10em;
-        height: 100vh;
+        height: 100vw;
     }
 }
 </style>
