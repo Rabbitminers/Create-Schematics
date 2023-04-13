@@ -1,5 +1,3 @@
-// Source: https://github.com/diesel-rs/diesel/blob/master/examples/postgres/advanced-blog-cli/src/pagination.rs
-
 #![allow(unused_imports)]
 use diesel::prelude::*;
 use diesel::query_builder::*;
