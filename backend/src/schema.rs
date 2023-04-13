@@ -28,6 +28,18 @@ table! {
     }
 }
 
+table! {
+    schematics (id) {
+        id -> VarChar,
+        title -> Varchar,
+        description -> Varchar,
+        author -> Int4,
+        tags -> Varchar,
+        display -> Varchar,
+        date -> Timestamp,
+    }
+}
+
 joinable!(login_history -> users (user_id));
 
-allow_tables_to_appear_in_same_query!(login_history, people, users,);
+allow_tables_to_appear_in_same_query!(login_history, people, users, schematics, );
