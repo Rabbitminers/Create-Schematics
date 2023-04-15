@@ -12,7 +12,8 @@ body {
     box-sizing: border-box;
     min-height: 100vh;
     color: var(--text-color);
-    background: var(--background-color) url('spruce.png') top center repeat;
+    background: url('spruce.png') top center repeat;
+    background-size: 5em;
     transition: color 0.5s, background-color 0.5s;
     image-rendering: pixelated;
     line-height: 1.6;
