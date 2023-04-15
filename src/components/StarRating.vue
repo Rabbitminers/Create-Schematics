@@ -9,16 +9,20 @@
       @mouseover=" selectable && setHoveredRating(index)"
       @mouseleave="clearHoveredRating"
     >
-      <i>*</i>
+      <StarIcon class="star-rating-icon"/>
     </section>
   </article>
 </template>
 
 <script lang="ts">
 import { ref } from 'vue';
+import StarIcon from '@/components/icons/StarIcon.vue'
 
 export default {
     name: 'StarRating',
+    components: {
+        StarIcon
+    },
     props: {
         maxRating: {
             type: Number,
@@ -79,16 +83,26 @@ export default {
         margin-right: 5px;
         font-size: var(--star-size);
 
-        i {
+        .star-rating-icon {
             font-size: var(--star-size);
+            width: 1em;
+            height: 1em;
+
+            g {
+                fill: gray;
+            }
         }
 
-        &.selected i {
-            color: var(--selected-color);
+        &.selected .star-rating-icon {
+            g {
+                fill: var(--selected-color);
+            }
         }
 
-        &.hovered i {
-            color: var(--hover-color);
+        &.hovered .star-rating-icon {
+            g {
+                fill: var(--hover-color);
+            }
         }
     }
 }
