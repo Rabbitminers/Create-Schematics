@@ -83,6 +83,10 @@ export default {
         margin-right: 5px;
         font-size: var(--star-size);
 
+        * {
+            transition: fill 0.7s cubic-bezier(0.075, 0.82, 0.165, 1)
+        }
+
         .star-rating-icon {
             font-size: var(--star-size);
             width: 1em;
