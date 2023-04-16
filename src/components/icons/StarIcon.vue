@@ -1,5 +1,5 @@
 <template>
-    <svg>
+    <svg viewBox="0 0 20 20" >
         <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <g id="Dribbble-Light-Preview" transform="translate(-99.000000, -320.000000)" fill="#000000">
             <g id="icons" transform="translate(56.000000, 160.000000)">
