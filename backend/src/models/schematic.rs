@@ -19,7 +19,7 @@ pub struct Schematic {
     pub date: NaiveDateTime,
 }
 
-#[derive(Insertable)]
+#[derive(Insertable, AsChangeset, Serialize, Deserialize)]
 #[table_name = "schematics"]
 pub struct SchematicDTO {
     pub title: String,
@@ -46,10 +46,6 @@ impl Schematic {
         }
     }
 
-    pub fn update(schematic: SchematicDTO, user: User, conn: &Connection) -> Result<String, String> {
-        unimplemented!()
-    }
-
     fn insert_schematic(schematic: &Schematic, conn: &Connection) -> Result<(), String> {
         diesel::insert_into(schematics)
             .values(schematic)
@@ -57,6 +53,17 @@ impl Schematic {
             .map_err(|err| format!("Failed to insert schematic: {:?}", err))?;
         Ok(())
     }
+
+    pub fn update(schematic_id: String, updated_schematic: SchematicDTO, conn: &Connection) -> QueryResult<usize> {
+        diesel::update(schematics.find(schematic_id))
+            .set(&updated_schematic)
+            .execute(conn)
+    }
+
+    pub fn delete(schematic_id: String, conn: &Connection) -> QueryResult<usize> {
+        diesel::delete(schematics.find(schematic_id)).execute(conn)
+    }
+
 
     fn new(schematic: SchematicDTO, user_id: i32) -> Result<Schematic, String> {
         if schematic.title.is_empty() || schematic.description.is_empty() {
@@ -79,7 +86,7 @@ impl Schematic {
         Ok(new_schematic)
     }
 
-    pub fn by_id(conn: &Connection, query_id: String) -> QueryResult<Option<Self>> {
+    pub fn find_by_id(conn: &Connection, query_id: String) -> QueryResult<Option<Self>> {
         schematics.filter(schematics::id.eq(query_id)).first(conn).optional()
     }
 
