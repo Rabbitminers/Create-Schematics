@@ -89,8 +89,8 @@ export default {
 
         .star-rating-icon {
             font-size: var(--star-size);
-            width: 1em;
-            height: 1em;
+            width: 0.7em;
+            height: 0.7em;
 
             g {
                 fill: gray;
