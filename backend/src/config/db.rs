@@ -52,6 +52,18 @@ pub fn migrate_and_config_db(url: &str) -> Pool {
     );"#,
     )
     .execute(&pool.get().unwrap());
+    sql_query(
+        r#"CREATE TABLE schematics (
+        id TEXT PRIMARY KEY NOT NULL,
+        title TEXT NOT NULL,
+        description TEXT NOT NULL,
+        author INTEGER NOT NULL REFERENCES users(id),
+        tags TEXT NOT NULL,
+        display TEXT NOT NULL,
+        date INTEGER NOT NULL
+    );"#,
+    )
+    .execute(&pool.get().unwrap());
 
     pool
 }
