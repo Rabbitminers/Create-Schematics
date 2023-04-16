@@ -8,6 +8,8 @@ use chrono::{NaiveDateTime, Utc};
 use diesel::prelude::*;
 use uuid::Uuid;
 
+use super::{filters::SchematicFilter, response::Page, pagination::SortingAndPaging};
+
 #[derive(Identifiable, Queryable, Serialize, Deserialize, Insertable)]
 pub struct Schematic {
     pub id: String,
@@ -45,6 +47,54 @@ impl Schematic {
             Err(e) => Err(e),
         }
     }
+
+    pub fn find_by_id(query_id: String, conn: &Connection) -> QueryResult<Option<Self>> {
+        schematics.filter(schematics::id.eq(query_id)).first(conn).optional()
+    }
+
+    pub fn find_all(page_num: i64, conn: &Connection) -> QueryResult<Vec<Schematic>> {
+        schematics.order(title.asc())
+            .limit(constants::DEFAULT_PER_PAGE)
+            .offset((page_num - 1) * constants::DEFAULT_PER_PAGE)
+            .load::<Schematic>(conn)
+    }
+
+    pub fn filter(filter: SchematicFilter, conn: &Connection) -> QueryResult<Page<Schematic>> {
+        let mut query = schematics::table.into_boxed();
+        
+        if let Some(i) = filter.title {
+            query = query.filter(title.like(format!("%{}%", i)));
+        }
+
+        if let Some(i) = filter.author {
+            query = query.filter(author.eq(i));
+        }
+
+        if let Some(i) = filter.tags {
+            let tag_list: Vec<&str> = i.split(",").map(|t| t.trim()).collect();
+            for tag in tag_list {
+                query = query.filter(tags.like(format!("%{}%", tag)));
+            }
+        }
+
+        if let Some(i) = filter.date {
+            query = query.filter(date.eq(i));
+        }
+
+        query
+            .paginate(
+            filter.page_num.unwrap_or(crate::constants::DEFAULT_PAGE_NUM),
+            )
+            .per_page(
+                filter.page_size.unwrap_or(crate::constants::DEFAULT_PER_PAGE),
+            )
+            .sort(
+        filter.sort_by.unwrap_or(crate::constants::EMPTY_STR.to_string()),
+ filter.sort_direction.unwrap_or(crate::constants::EMPTY_STR.to_string()),
+            )
+            .load_and_count_items::<Schematic>(conn)
+    }
+
 
     fn insert_schematic(schematic: &Schematic, conn: &Connection) -> Result<(), String> {
         diesel::insert_into(schematics)
@@ -84,10 +134,6 @@ impl Schematic {
         };
 
         Ok(new_schematic)
-    }
-
-    pub fn find_by_id(conn: &Connection, query_id: String) -> QueryResult<Option<Self>> {
-        schematics.filter(schematics::id.eq(query_id)).first(conn).optional()
     }
 
     pub fn generate_id() -> String {
