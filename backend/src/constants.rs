@@ -13,6 +13,9 @@ pub const MESSAGE_TOO_LONG: &str = "Schematic title or description is too long";
 pub const MESSAGE_UNAUTHORIZED: &str = "You are not authorized to this, try logging in again";
 pub const MESSAGE_CAN_NOT_DELETE_DATA: &str = "Can not delete data";
 pub const MESSAGE_CAN_NOT_UPDATE_DATA: &str = "Can not update data";
+pub const MESSAGE_CAN_NOT_FETCH_DATA: &str = "Can not fetch data";
+pub const MESSAGE_UPLOAD_SUCCESS: &str = "Uploaded successfully";
+pub const MESSAGE_SCHEMATIC_NOT_FOUND: &str = "Schematic not found";
 
 pub const MESSAGE_TOKEN_MISSING: &str = "Token is missing";
 
