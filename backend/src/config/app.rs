@@ -18,5 +18,11 @@ pub fn config_services(cfg: &mut web::ServiceConfig) {
                         web::resource("/logout").route(web::post().to(account_controller::logout)),
                     ),
             )
+            .service(
+                web::scope("/schematic")
+                    .service(
+                        web::resource("/upload").route(web::post().to(schematic_controller::upload)),
+                    )
+            )
     );
 }
