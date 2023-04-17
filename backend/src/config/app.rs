@@ -23,6 +23,15 @@ pub fn config_services(cfg: &mut web::ServiceConfig) {
                     .service(
                         web::resource("/upload").route(web::post().to(schematic_controller::upload)),
                     )
+                    .service(
+                        web::resource("/search").route(web::get().to(schematic_controller::search)),
+                    )
+                    .service(
+                        web::resource("/{id}/delete").route(web::post().to(schematic_controller::delete)),
+                    )
+                    .service(
+                        web::resource("/{id}/update").route(web::post().to(schematic_controller::update)),
+                    ),
             )
     );
 }
