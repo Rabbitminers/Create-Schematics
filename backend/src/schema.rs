@@ -40,6 +40,18 @@ table! {
     }
 }
 
+table! {
+    comments (id) {
+        id -> VarChar,
+        schematic_id -> VarChar,
+        rating -> Int4,
+        body -> Text,
+        author -> Int4,
+        date -> Timestamp,
+    }
+}
+
 joinable!(login_history -> users (user_id));
+joinable!(comments -> schematics (schematic_id));
 
 allow_tables_to_appear_in_same_query!(login_history, people, users, schematics, );
