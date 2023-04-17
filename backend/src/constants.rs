@@ -23,7 +23,7 @@ pub const AUTHORIZATION: &str = "Authorization";
 
 pub const EMPTY: &str = "";
 
-pub const IGNORE_ROUTES: [&str; 3] = ["/api/ping", "/api/auth/signup", "/api/auth/login"];
+pub const IGNORE_ROUTES: [&str; 4] = ["/api/ping", "/api/auth/signup", "/api/auth/login", "/api/schematic/search"];
 
 pub const DEFAULT_PER_PAGE: i64 = 10;
 
