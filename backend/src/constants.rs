@@ -16,6 +16,11 @@ pub const MESSAGE_CAN_NOT_UPDATE_DATA: &str = "Can not update data";
 pub const MESSAGE_CAN_NOT_FETCH_DATA: &str = "Can not fetch data";
 pub const MESSAGE_UPLOAD_SUCCESS: &str = "Uploaded successfully";
 pub const MESSAGE_SCHEMATIC_NOT_FOUND: &str = "Schematic not found";
+pub const MESSAGE_COMMENT_NOT_FOUND: &str = "Comment not found";
+pub const MESSAGE_INVALID_RATING: &str = "Rating must be between 1 and 5";
+pub const MESSAGE_DUPLICATE_COMMENT: &str = "You have already commented this schematic";
+pub const MESSAGE_CAN_NOT_DELETE_COMMENT: &str = "You don't have delete to modify this comment";
+pub const MESSAGE_CAN_NOT_MODIFY_COMMENT: &str = "You don't have modify to modify this comment";
 
 pub const MESSAGE_TOKEN_MISSING: &str = "Token is missing";
 
