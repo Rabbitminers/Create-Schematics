@@ -3,7 +3,7 @@ use crate::{
     constants,
     models::{
         response::ResponseBody,
-        schematic::{Schematic, SchematicDTO},
+        schematic::SchematicDTO,
         filters::SchematicFilter,
     },
     services::schematic_service,
