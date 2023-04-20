@@ -5,5 +5,4 @@ pub mod response;
 pub mod user;
 pub mod user_token;
 pub mod schematic;
-pub mod sorting;
 pub mod comments;
